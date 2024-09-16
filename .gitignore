@@ -1,0 +1,11 @@
+*
+!*/
+!.*
+!*.py
+!*.pyx
+!*.md
+!*.txt
+!*.ipynb
+!*.csv
+notebooks/.ipynb_checkpoints/*
+.ipynb_checkpoints/*
