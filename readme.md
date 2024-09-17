@@ -9,7 +9,7 @@
 - For LinearVC with multiple parallel utterances
 
 
-## Experiments from scratch on all utterances from LibriSpeech
+## Experiments on all utterances (LibriSpeech)
 
 Extract original WavLM features:
 
@@ -22,7 +22,7 @@ Experiments with all utterances:
     jupyter lab experiments_full.ipynb
 
 
-## Experiments from scratch on English-accented VCTK speakers
+## Experiments on parallel utterances (English-accented VCTK)
 
 Downsample speech to 16kHz:
 
@@ -40,7 +40,7 @@ Extract features for particular parallel utterances (for baselines):
 
 Experiments with parallel utterances:
 
-    jupyter lab experiments_parallel.ipynb
+    jupyter lab experiments_vctk.ipynb
 
 
 ## Results
