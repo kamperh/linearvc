@@ -1,7 +1,14 @@
 # LinearVC: Voice conversion with just linear regression
 
 
-## Minimal example
+## Quick start
+
+### Programmitic usage
+
+
+
+
+
 
 **to-do** Add easy notebook and usage from TorchHub:
 
@@ -65,4 +72,7 @@ kNN-VC:
                eer
     mean  0.353763
     std   0.079758
+
+    WER: 27.37% +- 0.45%
+    CER: 19.18% +- 0.29%
 
