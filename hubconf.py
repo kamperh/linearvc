@@ -1,4 +1,6 @@
-dependencies = ["torch", "torchaudio", "numpy", "celer"]
+dependencies = ["torch", "torchaudio", "numpy", "celer", "tqdm"]
+
+import torch
 
 from linearvc import LinearVC
 

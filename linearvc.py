@@ -199,17 +199,17 @@ def main(args):
 
     linearvc_model = LinearVC(wavlm, hifigan, device)
 
-    # Get the lists of source and target audio files
+    # Lists of source and target audio files
     print("Reading from:", args.source_wav_dir)
     source_wavs = list(args.source_wav_dir.rglob("*" + args.extension))
     print("Reading from:", args.target_wav_dir)
     target_wavs = list(args.target_wav_dir.rglob("*" + args.extension))
 
-    # Get the features for the source input utterance
+    # Features for the source input utterance
     print("Reading:", args.input_wav)
     input_features = linearvc_model.get_features(args.input_wav)
 
-    # Get the voice conversion projection matrix
+    # The voice conversion projection matrix
     W = linearvc_model.get_projmat(
         source_wavs,
         target_wavs,

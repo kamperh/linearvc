@@ -2,7 +2,7 @@
 
 To-do:
 
-- Jupyter notebook link
+- Jupyter notebook link (demo.ipynb)
 - arXiv link (see Simon)
 - license link
 
@@ -12,15 +12,45 @@ To-do:
 ### Programmatic usage
 
 Install the dependencies in `environment.yml` or run
-`conda env create -f environment.yml` and check that everything install
+`conda env create -f environment.yml` and check that everything installed
 correctly.
 
-To-do: HERE! Check `demo.ipynb`
+```Python
+import torch
+import torchaudio
+
+# Load all the required models
+linearvc_model = torch.hub.load("kamperh/linearvc", "get_linearvc", trust_repo=True, device="cuda")
+
+# Lists of source and target audio files
+source_wavs = ["<filename of audio from source speaker 1>.wav", "<filename of audio from source speaker 2>.wav", ... ]
+target_wavs = ["<filename of audio from target speaker 1>.wav", "<filename of audio from target speaker 2>.wav", ... ]
+
+# Source input utterance
+input_features = linearvc_model.get_features("<filename>.wav")
+
+# Voice conversion projection matrix
+W = linearvc_model.get_projmat(
+    source_wavs,
+    target_wavs,
+    parallel=True,  # disable if not parallel
+    vad=False,
+)
+
+# Project the input and vocode
+output_wav = linearvc_model.project_and_vocode(input_features, W)
+torchaudio.save("output.wav", output_wav[None], 16000)
+```
+
+If `parallel=True`, utterances with the same filename is paired up. If
+`parallel=False`, the utterances don't have to align at all, but then you need
+more data (at least 3 minutes per speaker is good, more than that doesn't help
+much).
 
 
 ### Script usage
 
-Perform LinearVC by reading all the source and target audio files in given
+Perform LinearVC by finding all the source and target audio files in given
 directories:
 
     ./linearvc.py \
@@ -30,11 +60,11 @@ directories:
         ~/LibriSpeech/dev-clean/1272/128104/1272-128104-0000.flac \
         output.wav
 
-When parallel utterances are available, much less data is needed. The script
-with `--parallel` scans two directories and pairs up all utterances with the
-same filename. E.g. below it finds `002.wav`, `003.wav`, etc. in the `p225/`
-source directory and then pairs these up with the same filenames in the `p226/`
-directory.
+When parallel utterances are available, much less data is needed. Running the
+script with `--parallel` as below scans two directories and pairs up all
+utterances with the same filename. E.g. below it finds `002.wav`, `003.wav`,
+etc. in the `p225/` source directory and then pairs these up with the same
+filenames in the `p226/` directory.
 
     ./linearvc.py \
         --parallel \
@@ -72,14 +102,10 @@ options:
 ```
 
 
-
-**to-do** Add easy notebook and usage from TorchHub:
-
-- For full LinearVC, similar to kNN-VC
-- For LinearVC with multiple parallel utterances
-
-
 ## Experiments on all utterances (LibriSpeech)
+
+In this in the next section, the steps to generate the results in the paper are
+described.
 
 Extract original WavLM features:
 
@@ -92,11 +118,12 @@ Experiments with all utterances:
     jupyter lab experiments_full.ipynb
 
 
+
 ## Experiments on parallel utterances (English-accented VCTK)
 
 Downsample speech to 16kHz:
 
-    ./resample_vad.py ~/endgame/datasets/VCTK-Corpus/wav48 ~/scratch/vctk/wav
+    ./resample_vad.py ~/endgame/datasets/VCTK-Corpus/wav48. ~/scratch/vctk/wav/
 
 Create the evaluation dataset (which is already in the `data` directory released
 with the repo):
@@ -106,36 +133,8 @@ with the repo):
 Extract features for particular parallel utterances (for baselines):
 
     ./extract_wavlm.py --utterance 008 \
-        ~/scratch/vctk/wav ~/scratch/vctk/wavlm_008
+        ~/scratch/vctk/wav/ ~/scratch/vctk/wavlm_008/
 
 Experiments with parallel utterances:
 
     jupyter lab experiments_vctk.ipynb
-
-
-## Results
-
-With all utterances we get the following results.
-
-
-
-With one parallel utterance we get the following results.
-
-LinearVC:
-
-               eer
-    mean  0.314409
-    std   0.083072
-
-    WER: 7.58% +- 0.22%
-    CER: 6.93% +- 0.12%
-
-kNN-VC:
-
-               eer
-    mean  0.353763
-    std   0.079758
-
-    WER: 27.37% +- 0.45%
-    CER: 19.18% +- 0.29%
-

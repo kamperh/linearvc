@@ -6,7 +6,6 @@ channels:
 dependencies:
   - python=3
   - jupyter
-  - matplotlib
   - ipython
   - numpy
   - tqdm
