@@ -1,12 +1,75 @@
 # LinearVC: Voice conversion with just linear regression
 
+To-do:
+
+- Jupyter notebook link
+- arXiv link (see Simon)
+- license link
+
 
 ## Quick start
 
-### Programmitic usage
+### Programmatic usage
+
+Install the dependencies in `environment.yml` or run
+`conda env create -f environment.yml` and check that everything install
+correctly.
+
+To-do: HERE! Check `demo.ipynb`
 
 
+### Script usage
 
+Perform LinearVC by reading all the source and target audio files in given
+directories:
+
+    ./linearvc.py \
+        --extension .flac \
+        ~/LibriSpeech/dev-clean/1272/ \
+        ~/LibriSpeech/dev-clean/1462/ \
+        ~/LibriSpeech/dev-clean/1272/128104/1272-128104-0000.flac \
+        output.wav
+
+When parallel utterances are available, much less data is needed. The script
+with `--parallel` scans two directories and pairs up all utterances with the
+same filename. E.g. below it finds `002.wav`, `003.wav`, etc. in the `p225/`
+source directory and then pairs these up with the same filenames in the `p226/`
+directory.
+
+    ./linearvc.py \
+        --parallel \
+        data/vctk_demo/p225/ \
+        data/vctk_demo/p226/ \
+        data/vctk_demo/p225/067.wav \
+        output2.wav
+
+Full script details:
+
+```
+usage: linearvc.py [-h] [--parallel] [--lasso LASSO] [--vad]
+                   [--extension {.flac,.wav}]
+                   source_wav_dir target_wav_dir input_wav output_wav
+
+Perform voice conversion with linear regression.
+
+positional arguments:
+  source_wav_dir        directory with source speaker speech
+  target_wav_dir        directory with target speaker speech
+  input_wav             input speech filename
+  output_wav            output speech filename
+
+options:
+  -h, --help            show this help message and exit
+  --parallel            whether source and target utterances are parallel, in
+                        which case the filenames in the two directories should
+                        match
+  --lasso LASSO         lasso is applied with this alpha value
+  --vad                 voice activatiy detecion is applied to start of
+                        utterance
+  --extension {.flac,.wav}
+                        source and target audio file extension (default:
+                        '.wav')
+```
 
 
 

@@ -3,6 +3,7 @@
 !.*
 !*.py
 !*.pyx
+!*.yml
 !*.md
 !*.txt
 !*.ipynb
