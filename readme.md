@@ -132,7 +132,7 @@ with the repo):
 
 Extract features for particular parallel utterances (for baselines):
 
-    ./extract_wavlm.py --utterance 008 \
+    ./extract_wavlm_vctk.py --utterance 008 \
         ~/scratch/vctk/wav/ ~/scratch/vctk/wavlm_008/
 
 Experiments with parallel utterances:
