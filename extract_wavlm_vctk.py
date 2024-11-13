@@ -15,6 +15,8 @@ import sys
 import torch
 import torchaudio
 
+from utils import pca_transform
+
 device = "cuda"
 
 
@@ -28,6 +30,11 @@ def check_argv():
         help="only extract features for this utterance"
         " (default: all utterances)",
     )
+    parser.add_argument(
+        "--pca",
+        type=Path,
+        help="NumPy archive with PCA parameters (default: no PCA)",
+    )
     return parser.parse_args()
 
 
@@ -35,6 +42,16 @@ def main(args):
     wavlm = torch.hub.load(
         "bshall/knn-vc", "wavlm_large", trust_repo=True, device=device
     )
+
+    if args.pca is not None:
+        print("Reading:", args.pca)
+        pca = np.load(args.pca)
+        temp = {}
+        for key in pca:
+            temp[key] = torch.from_numpy(pca[key]).float().to(device)
+        pca = temp
+    else:
+        pca = None
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -53,6 +70,13 @@ def main(args):
             wav = wav.to(device)
             with torch.inference_mode():
                 feats, _ = wavlm.extract_features(wav, output_layer=6)
+            if pca is not None:
+                feats = pca_transform(
+                    feats,
+                    pca["mean"],
+                    pca["components"],
+                    pca["explained_variance"],
+                )
             feats = feats.cpu().numpy().squeeze()
             feats = np.float16(feats)
             np.save(output_fn, feats)
@@ -64,6 +88,13 @@ def main(args):
                 wav = wav.to(device)
                 with torch.inference_mode():
                     x, _ = wavlm.extract_features(wav, output_layer=6)
+                if pca is not None:
+                    x = pca_transform(
+                        x,
+                        pca["mean"],
+                        pca["components"],
+                        pca["explained_variance"],
+                    )
                 x = x.cpu().numpy().squeeze()
                 features.append(x)
 
