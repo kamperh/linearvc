@@ -43,9 +43,8 @@ torchaudio.save("output.wav", output_wav[None], 16000)
 ```
 
 If `parallel=True`, utterances with the same filename is paired up. If
-`parallel=False`, the utterances don't have to align at all, but then you need
-more data (at least 3 minutes per speaker is good, more than that doesn't help
-much).
+`parallel=False`, the utterances don't have to align, but then you need more
+data (at least 3 minutes per speaker is good, more than that doesn't help much).
 
 
 ### Script usage
@@ -123,7 +122,7 @@ Experiments with all utterances:
 
 Downsample speech to 16kHz:
 
-    ./resample_vad.py ~/endgame/datasets/VCTK-Corpus/wav48. ~/scratch/vctk/wav/
+    ./resample_vad.py ~/endgame/datasets/VCTK-Corpus/wav48/ ~/scratch/vctk/wav/
 
 Create the evaluation dataset (which is already in the `data` directory released
 with the repo):
