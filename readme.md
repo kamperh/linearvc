@@ -2,9 +2,10 @@
 
 To-do:
 
-- Jupyter notebook link (demo.ipynb)
-- arXiv link (see Simon)
-- license link
+- [ ] Jupyter notebook link (demo.ipynb)
+- [ ] Check that torch.hub works
+- [ ] arXiv link (see Simon)
+- [ ] License link
 
 
 ## Quick start
@@ -42,9 +43,9 @@ output_wav = linearvc_model.project_and_vocode(input_features, W)
 torchaudio.save("output.wav", output_wav[None], 16000)
 ```
 
-If `parallel=True`, utterances with the same filename is paired up. If
+If `parallel=True`, utterances with the same filename are paired up. If
 `parallel=False`, the utterances don't have to align, but then you need more
-data (at least 3 minutes per speaker is good, more than that doesn't help much).
+data (3 minutes per speaker is good, more than that doesn't help much).
 
 
 ### Script usage
@@ -101,24 +102,7 @@ options:
 ```
 
 
-## Experiments on all utterances (LibriSpeech)
-
-In this in the next section, the steps to generate the results in the paper are
-described.
-
-Extract original WavLM features:
-
-    ./extract_wavlm_libri.py \
-        ~/endgame/datasets/librispeech/LibriSpeech/test-clean/ \
-        ~/scratch/test-clean/wavlm/
-
-Experiments with all utterances:
-
-    jupyter lab experiments_full.ipynb
-
-
-
-## Experiments on parallel utterances (English-accented VCTK)
+## Experiments on parallel utterances (VCTK)
 
 Downsample speech to 16kHz:
 
@@ -137,3 +121,22 @@ Extract features for particular parallel utterances (for baselines):
 Experiments with parallel utterances:
 
     jupyter lab experiments_vctk.ipynb
+
+
+## Experiments on all utterances (LibriSpeech)
+
+In this in the next section, the steps to generate the results in the paper are
+described.
+
+Extract original WavLM features:
+
+    ./extract_wavlm_libri.py \
+        ~/endgame/datasets/librispeech/LibriSpeech/test-clean/ \
+        ~/scratch/test-clean/wavlm/
+
+Experiments with all utterances:
+
+    jupyter lab experiments_full.ipynb
+
+
+
