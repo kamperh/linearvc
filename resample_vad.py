@@ -54,6 +54,7 @@ speakers = [
 
 def check_argv():
     parser = argparse.ArgumentParser(description=__doc__.strip().split("\n")[0])
+    parser.add_argument("speaker_fn", type=Path)
     parser.add_argument("input_dir", type=Path)
     parser.add_argument("output_dir", type=Path)
     parser.add_argument(
@@ -92,6 +93,10 @@ def resample_vad_wav(input_fn, output_fn, target_sr):
 def main(args):
     print("Reading from:", args.input_dir)
     input_wav_fns = list(args.input_dir.rglob("*.wav"))
+
+    print("Reading:", args.speaker_fn)
+    with open(args.speaker_fn) as f:
+        speakers = [line.strip() for line in f.readlines()]
 
     input_wav_fns = [i for i in input_wav_fns if i.parent.stem in speakers]
 

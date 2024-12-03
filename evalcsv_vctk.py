@@ -12,13 +12,14 @@ from tqdm import tqdm
 import argparse
 import random
 
-# vctk_wav_dir = vctk_dir / "wav48"
-vctk_wav_dir = Path("/home/kamperh/scratch/vctk/wav/")
+# args.wav_dir = Path("/home/kamperh/scratch/vctk/wav/")
 n_utt_per_pair = 5
 
 
 def check_argv():
     parser = argparse.ArgumentParser(description=__doc__.strip().split("\n")[0])
+    parser.add_argument("speaker_fn", type=Path)
+    parser.add_argument("wav_dir", type=Path)
     parser.add_argument(
         "output_csv",
         type=str,
@@ -28,18 +29,9 @@ def check_argv():
 
 
 def main(args):
-    # vctk_dir = Path("/home/kamperh/endgame/datasets/VCTK-Corpus")
-    # speaker_fn = vctk_dir / "speaker-info.txt"
-    # speakers = set()
-    # print("Reading:", speaker_fn)
-    # with open(speaker_fn) as f:
-    #     for line in f:
-    #         line = [i for i in line.split("  ") if i != ""]
-    #         if line[3] == "English":
-    #             speakers.add(f"p{line[0]}")
-    # print("No. speakers:", len(speakers))
-
-    from resample_vad import speakers
+    print("Reading:", args.speaker_fn)
+    with open(args.speaker_fn) as f:
+        speakers = [line.strip() for line in f.readlines()]
 
     random.seed(13)
     print("Writing:", args.output_csv)
@@ -58,8 +50,8 @@ def main(args):
                     source_fn = Path(f"{source}/{source}_{i_utt:03d}.wav")
                     target_fn = Path(f"{target}/{target}_{i_utt:03d}.wav")
                     if not (
-                        (vctk_wav_dir / source_fn).is_file()
-                        and (vctk_wav_dir / target_fn).is_file()
+                        (args.wav_dir / source_fn).is_file()
+                        and (args.wav_dir / target_fn).is_file()
                     ):
                         i_utt += 1
                         continue
@@ -82,9 +74,7 @@ def main(args):
 
                     choices = [
                         i.stem
-                        for i in sorted(
-                            (vctk_wav_dir / f"{source}").glob("*.wav")
-                        )
+                        for i in sorted((args.wav_dir / f"{source}").glob("*.wav"))
                     ]
                     choices = choices[25:]  # first 24 is parallel
 
@@ -98,8 +88,8 @@ def main(args):
 
                     # target_fn = Path(f"{target}/{target}_{i_utt:03d}.wav")
                     if not (
-                        (vctk_wav_dir / source_fn).is_file()
-                        and (vctk_wav_dir / target_fn).is_file()
+                        (args.wav_dir / source_fn).is_file()
+                        and (args.wav_dir / target_fn).is_file()
                     ):
                         i_utt += 1
                         continue

@@ -1,5 +1,38 @@
 # Development log
 
+### 2024-11-18
+
+VCTK, scottish, lasso=0.4:
+
+    EER: 0.307018 +- 0.05279
+
+    WER: 7.47% +- 0.36%
+    CER: 6.58% +- 0.19%
+
+VCTK, scottish, orthogonal_procrustes:
+
+               eer
+    mean  0.336842
+    std   0.058801
+
+    WER: 10.83% +- 0.44%
+    CER: 8.60% +- 0.26%
+
+VCTK, scottish, additive:
+
+               eer
+    mean  0.204678
+    std   0.066079
+
+    WER: 4.80% +- 0.26%
+    CER: 4.91% +- 0.14%
+
+VCTK, scottish, groundtruth:
+
+    WER: 4.13% +- 1.19%
+    CER: 4.67% +- 0.66%
+
+
 ### 2024-11-13
 
 LibriSpeech, alpha=3.0:
@@ -23,6 +56,17 @@ LibriSpeech, alpha=0.3:
 
     WER: 4.89% +- 0.12%
     CER: 2.72% +- 0.11%
+
+LibriSpeech, alpha=0.4:
+
+    # /home/kamperh/scratch/linearvc/dev-clean/2024-11-12_lasso0.4
+
+               eer
+    mean  0.176282
+    std   0.109882
+
+    WER: 4.91% +- 0.12%
+    CER: 2.71% +- 0.11%
 
 LibriSpeech, lstsq:
 

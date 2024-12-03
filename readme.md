@@ -106,17 +106,34 @@ options:
 
 Downsample speech to 16kHz:
 
-    ./resample_vad.py ~/endgame/datasets/VCTK-Corpus/wav48/ ~/scratch/vctk/wav/
+    # Development set
+    ./resample_vad.py \
+        data/vctk_scottish.txt \
+        ~/endgame/datasets/VCTK-Corpus/wav48/ \
+        ~/scratch/vctk/wav/scottish/
+
+    # Test set
+    ./resample_vad.py \
+        data/vctk_english.txt \
+        ~/endgame/datasets/VCTK-Corpus/wav48/ \
+        ~/scratch/vctk/wav/english/
 
 Create the evaluation dataset (which is already in the `data` directory released
 with the repo):
 
-    ./evalcsv_vctk.py data/speakersim_vctk_english_2024-09-16.csv
+    ./evalcsv_vctk.py \
+        data/vctk_scottish.txt \
+        /home/kamperh/scratch/vctk/wav/scottish/ \
+        data/speakersim_vctk_scottish_2024-09-16.csv
+    ./evalcsv_vctk.py \
+        data/vctk_english.txt \
+        /home/kamperh/scratch/vctk/wav/english/ \
+        data/speakersim_vctk_english_2024-09-16.csv
 
 Extract features for particular parallel utterances (for baselines):
 
     ./extract_wavlm_vctk.py --utterance 008 \
-        ~/scratch/vctk/wav/ ~/scratch/vctk/wavlm_008/
+        ~/scratch/vctk/wav/english/ ~/scratch/vctk/english/wavlm_008/
 
 Experiments with parallel utterances:
 
