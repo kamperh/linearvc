@@ -1,11 +1,12 @@
 # LinearVC: Voice conversion with just linear regression
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](license.md)
+
 To-do:
 
 - [ ] Jupyter notebook link (demo.ipynb)
 - [ ] Check that torch.hub works
 - [ ] arXiv link (see Simon)
-- [ ] License link
 
 
 ## Quick start
