@@ -143,9 +143,6 @@ Experiments with parallel utterances:
 
 ## Experiments on all utterances (LibriSpeech)
 
-In this in the next section, the steps to generate the results in the paper are
-described.
-
 Extract original WavLM features:
 
     ./extract_wavlm_libri.py \ 
