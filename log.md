@@ -20,6 +20,15 @@ LibriSpeech dev-clean subset using "old" LinearVC:
     WER: 5.34% +- 0.29%
     CER: 2.55% +- 0.12%
 
+LibriSpeech, bias-only:
+
+               eer
+    mean  0.077692
+    std   0.086458
+
+    WER: 5.09% +- 0.16%
+    CER: 2.99% +- 0.16%
+
 
 ### 2024-11-18
 

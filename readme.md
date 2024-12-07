@@ -103,6 +103,22 @@ options:
 ```
 
 
+## Experiments on all utterances (LibriSpeech)
+
+Extract WavLM features:
+
+    ./extract_wavlm_libri.py \ 
+        ~/endgame/datasets/librispeech/LibriSpeech/dev-clean/ \
+        ~/scratch/dev-clean/wavlm/
+    ./extract_wavlm_libri.py \ 
+        ~/endgame/datasets/librispeech/LibriSpeech/test-clean/ \
+        ~/scratch/test-clean/wavlm/
+
+Experiments with all utterances:
+
+    jupyter lab experiments_libri.ipynb
+
+
 ## Experiments on parallel utterances (VCTK)
 
 Downsample speech to 16kHz:
@@ -139,22 +155,4 @@ Extract features for particular parallel utterances (for baselines):
 Experiments with parallel utterances:
 
     jupyter lab experiments_vctk.ipynb
-
-
-## Experiments on all utterances (LibriSpeech)
-
-Extract original WavLM features:
-
-    ./extract_wavlm_libri.py \ 
-        ~/endgame/datasets/librispeech/LibriSpeech/dev-clean/ \
-        ~/scratch/dev-clean/wavlm/
-    ./extract_wavlm_libri.py \ 
-        ~/endgame/datasets/librispeech/LibriSpeech/test-clean/ \
-        ~/scratch/test-clean/wavlm/
-
-Experiments with all utterances:
-
-    jupyter lab experiments_full.ipynb
-
-
 
