@@ -1,5 +1,26 @@
 # Development log
 
+### 2024-12-06
+
+LibriSpeech dev-clean subset using SVD basis:
+
+               eer
+    mean  0.334359
+    std   0.131732
+
+    WER: 5.12% +- 0.27%
+    CER: 2.58% +- 0.13%
+
+LibriSpeech dev-clean subset using "old" LinearVC:
+
+               eer
+    mean  0.331795
+    std   0.105064
+
+    WER: 5.34% +- 0.29%
+    CER: 2.55% +- 0.12%
+
+
 ### 2024-11-18
 
 VCTK, scottish, lasso=0.4:
@@ -78,6 +99,29 @@ LibriSpeech, lstsq:
 
     WER: 5.42% +- 0.18%
     CER: 3.18% +- 0.18%
+
+LibriSpeech, LinearRegression with bias:
+
+    # /home/kamperh/scratch/linearvc/dev-clean/2024-12-04_linear_bias
+
+               eer
+    mean  0.317564
+    std   0.112901
+
+    WER: 5.43% +- 0.18%
+    CER: 3.20% +- 0.18%
+
+
+LibriSpeech, orthogonal_procrustes with bias:
+
+    # /home/kamperh/scratch/linearvc/dev-clean/2024-12-04_procrustes_bias
+
+               eer
+    mean  0.285513
+    std   0.110376
+
+    WER: 5.17% +- 0.16%
+    CER: 3.03% +- 0.16%
 
 LibriSpeech, orthogonal_procrustes:
 

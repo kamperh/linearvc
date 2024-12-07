@@ -25,12 +25,12 @@ def check_argv():
     parser.add_argument(
         "librispeech_dir",
         type=Path,
-        help="LibriSpeech directory ending in e.g. `dev-clean`",
+        help="LibriSpeech directory ending in e.g. `dev-clean/`",
     )
     parser.add_argument(
         "output_dir",
         type=Path,
-        help="output will be written to a `wavlm` subdirectory",
+        help="output will be written to a `wavlm/` subdirectory",
     )
     parser.add_argument(
         "--pca",

@@ -148,7 +148,10 @@ described.
 
 Extract original WavLM features:
 
-    ./extract_wavlm_libri.py \
+    ./extract_wavlm_libri.py \ 
+        ~/endgame/datasets/librispeech/LibriSpeech/dev-clean/ \
+        ~/scratch/dev-clean/wavlm/
+    ./extract_wavlm_libri.py \ 
         ~/endgame/datasets/librispeech/LibriSpeech/test-clean/ \
         ~/scratch/test-clean/wavlm/
 
