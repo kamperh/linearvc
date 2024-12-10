@@ -1,5 +1,12 @@
 # Development log
 
+### 2024-12-10
+
+LibriSpeech dev-clean using content factorisation, r=64:
+
+
+
+
 ### 2024-12-06
 
 LibriSpeech dev-clean subset using SVD basis:
