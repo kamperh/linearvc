@@ -37,6 +37,11 @@ def check_argv():
         type=Path,
         help="NumPy archive with PCA parameters (default: no PCA)",
     )
+    parser.add_argument(
+        "--exclude",
+        type=Path,
+        help="exclude utterances with filenames in this file",
+    )
     return parser.parse_args()
 
 
@@ -55,6 +60,13 @@ def main(args):
     else:
         pca = None
 
+    if args.exclude is not None:
+        print("Reading:", args.exclude)
+        exclude_utterances = set()
+        with open(args.exclude) as f:
+            for line in f:
+                exclude_utterances.add(line.strip())
+
     wav_dir = args.librispeech_dir
     output_dir = args.output_dir
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -68,6 +80,8 @@ def main(args):
 
         features = []
         for wav_fn in tqdm(sorted(speaker_dir.rglob("*/*.flac")), leave=False):
+            if wav_fn.stem in exclude_utterances:
+                continue
             wav, _ = torchaudio.load(wav_fn)
             wav = wav.to(device)
             with torch.inference_mode():

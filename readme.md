@@ -107,12 +107,14 @@ options:
 
 Extract WavLM features:
 
-    ./extract_wavlm_libri.py \ 
+    ./extract_wavlm_libri.py \
+        --exclude data/eval_inputs_dev-clean.txt \
         ~/endgame/datasets/librispeech/LibriSpeech/dev-clean/ \
-        ~/scratch/dev-clean/wavlm/
+        ~/scratch/dev-clean/wavlm_exclude/
     ./extract_wavlm_libri.py \ 
+        --exclude data/eval_inputs_test-clean.txt \
         ~/endgame/datasets/librispeech/LibriSpeech/test-clean/ \
-        ~/scratch/test-clean/wavlm/
+        ~/scratch/test-clean/wavlm_exclude/
 
 Experiments with all utterances:
 
