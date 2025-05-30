@@ -5,8 +5,8 @@
 To-do:
 
 - [ ] Jupyter notebook link (demo.ipynb)
-- [ ] Check that torch.hub works
-- [ ] arXiv link (see Simon)
+- [ ] Remove torch.hub everywhere
+- [ ] arXiv link
 
 
 ## Quick start
