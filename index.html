@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>LinearVC</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <style>
+
+        body {
+            font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 1.5;
+            color:#333;
+            background-color:#fff;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            line-height: 1.2;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 40px;  /* 42px */
+            font-weight: 300;
+            letter-spacing: -1px;
+            line-height: 1.1;
+        }
+
+        h2, h3 {
+            font-size: 25px;
+            font-weight: 400;
+        }
+
+/*      
+        @media handheld, only screen and (max-width:480px) {
+            body { padding: 0; }
+        }
+*/
+
+        table {
+            display: block;
+            width: 100%;
+            border-collapse: collapse;
+            overflow: auto;
+            text-align: center;
+        }
+
+        a{
+            color: #2a7ae2;
+            text-decoration: none;
+        }
+        a:visited{
+            color: #1756a9;
+        }
+        a:hover{
+            color: #333;
+            text-decoration: underline;
+        }
+
+        .audio_smaller {
+            max-width: 210px;  /* 195px */
+        }
+
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:300,400,700,italic" rel="stylesheet">
+</head>
+
+<body>
+    <h1>LinearVC: Linear transformations of self-supervised features through the lens of voice conversion</h1>
+
+    <p style="text-align: center">
+        <a href="https://www.kamperh.com/" target="_blank" rel="external noopener noreferrer">Herman Kamper</a>,
+        <a href="https://scholar.google.com/citations?user=zCokvy8AAAAJ&amp;hl=en&amp;oi=ao" target="_blank" rel="external noopener noreferrer">Benjamin van Niekerk</a>,
+        <a href="https://www.linkedin.com/in/julian-zaidi-874696120/" target="_blank" rel="external noopener noreferrer">Julian Zaïdi</a>,
+        <a href="https://macarbonneau.github.io/" target="_blank" rel="external noopener noreferrer">Marc-André Carbonneau</a>
+    </p>
+    <p style="text-align: center">
+        [<a href="doi" target="_blank" rel="external noopener noreferrer">paper</a>]
+        &ensp;
+        [<a href="https://arxiv.org/abs/???" target="_blank" rel="external noopener noreferrer">arXiv</a>]
+        &ensp;
+        [<a href="https://github.com/kamperh/linearvc/" target="_blank" rel="external noopener noreferrer">code</a>]
+    </p>
+
+    <p>
+        We introduce LinearVC, a simple voice conversion method that sheds light on the structure of self-supervised representations. First, we show that simple linear transformations of self-supervised features effectively convert voices. Next, we probe the geometry of the feature space by constraining the set of allowed transformations. We find that just rotating the features is sufficient for high-quality voice conversion. This suggests that content information is embedded in a low-dimensional subspace which can be linearly transformed to produce a target voice. To validate this hypothesis, we finally propose a method that explicitly factorizes content and speaker information using singular value decomposition; the resulting linear projection with a rank of just 100 gives competitive conversion results. Our work has implications for both practical voice conversion and a broader understanding of self-supervised speech representations.
+    </p>
+
+    <h2>Comparing LinearVC to other systems</h2>
+
+    <table>
+        <tbody>        
+        <tr>
+            <td>Source</td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/subjective/3_source_1188-133604-0036-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/subjective/6_source_1320-122612-0008-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/subjective/7_source_1320-122612-0013-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/subjective/8_source_1580-141083-0003-norm.wav"></audio>
+            </td>
+        </tr>
+        <tr>
+            <td>Target</td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/subjective/3_target_1995-1837-0007-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/subjective/6_target_1188-133604-0025-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/subjective/7_target_1221-135766-0004-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/subjective/8_target_2830-3980-0037-norm.wav"></audio>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="https://arxiv.org/abs/2210.15418" target="_blank" rel="external noopener noreferrer">FreeVC</a>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/subjective/3_freevc-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/subjective/6_freevc-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/subjective/7_freevc-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/subjective/8_freevc-norm.wav"></audio>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="https://arxiv.org/abs/2305.09636" target="_blank" rel="external noopener noreferrer">SoundStorm</a>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/subjective/3_llm-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/subjective/6_llm-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/subjective/7_llm-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/subjective/8_llm-norm.wav"></audio>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="https://arxiv.org/abs/2305.18975" target="_blank" rel="external noopener noreferrer">kNN-VC</a>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/subjective/3_knnvc-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/subjective/6_knnvc-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/subjective/7_knnvc-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/subjective/8_knnvc-norm.wav"></audio>
+            </td>
+        </tr>
+        <tr>
+            <td>LinearVC</td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/subjective/3_linearvc-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/subjective/6_linearvc-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/subjective/7_linearvc-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/subjective/8_linearvc-norm.wav"></audio>
+            </td>
+        </tr>
+        <tr>
+            <td>LinearVC cont. fact.</td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/subjective/3_linearvc_contentfact-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/subjective/6_linearvc_contentfact-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/subjective/7_linearvc_contentfact-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/subjective/8_linearvc_contentfact-norm.wav"></audio>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <br>
+
+    <h2>Constrained linear transformations</h2>
+
+    <p>We consider voice conversion results when we constrain the types of linear transformations allowed in LinearVC.</p>
+
+    <table>
+        <tbody>
+        <tr>
+            <td>Source</td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/constrained/source/6319-57405-0000-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/constrained/source/1919-142785-0004-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/constrained/source/3000-15664-0011-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/constrained/source/8842-302196-0009-norm.wav"></audio>
+            </td>
+        </tr>
+        <tr>
+            <td>Target</td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/constrained/target/5694-64025-0023-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/constrained/target/2803-154320-0003-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/constrained/target/251-118436-0000-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/constrained/target/84-121123-0001-norm.wav"></audio>
+            </td>
+        </tr>
+        <tr>
+            <td>Bias only</td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/constrained/2025-01-07_bias/6319-57405-0000/5694-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/constrained/2025-01-07_bias/1919-142785-0004/2803-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/constrained/2025-01-07_bias/3000-15664-0011/251-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/constrained/2025-01-07_bias/8842-302196-0009/84-norm.wav"></audio>
+            </td>
+        </tr>
+        <tr>
+            <td>Orthogonal</td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/constrained/2025-01-07_procrustes/6319-57405-0000/5694-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/constrained/2025-01-07_procrustes/1919-142785-0004/2803-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/constrained/2025-01-07_procrustes/3000-15664-0011/251-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/constrained/2025-01-07_procrustes/8842-302196-0009/84-norm.wav"></audio>
+            </td>
+        </tr>
+        <tr>
+            <td>No constraints</td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/constrained/2025-01-07/6319-57405-0000/5694-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/constrained/2025-01-07/1919-142785-0004/2803-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/constrained/2025-01-07/3000-15664-0011/251-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/constrained/2025-01-07/8842-302196-0009/84-norm.wav"></audio>
+            </td>
+        </tr>
+        <tr>
+            <td>Cont. fact. r=6</td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/constrained/2025-01-07_fact_r6/6319-57405-0000/5694-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/constrained/2025-01-07_fact_r6/1919-142785-0004/2803-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/constrained/2025-01-07_fact_r6/3000-15664-0011/251-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/constrained/2025-01-07_fact_r6/8842-302196-0009/84-norm.wav"></audio>
+            </td>
+        </tr>
+        <tr>
+            <td>Cont. fact. r=16</td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/constrained/2025-01-07_fact_r16/6319-57405-0000/5694-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/constrained/2025-01-07_fact_r16/1919-142785-0004/2803-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/constrained/2025-01-07_fact_r16/3000-15664-0011/251-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/constrained/2025-01-07_fact_r16/8842-302196-0009/84-norm.wav"></audio>
+            </td>
+        </tr>
+        <tr>
+            <td>Cont. fact. r=100</td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/constrained/2025-01-07_fact_r100/6319-57405-0000/5694-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/constrained/2025-01-07_fact_r100/1919-142785-0004/2803-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/constrained/2025-01-07_fact_r100/3000-15664-0011/251-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/constrained/2025-01-07_fact_r100/8842-302196-0009/84-norm.wav"></audio>
+            </td>
+        </tr>        
+        <tr>
+            <td>Cont. fact. r=256</td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/constrained/2025-01-07_fact_r256/6319-57405-0000/5694-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/constrained/2025-01-07_fact_r256/1919-142785-0004/2803-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/constrained/2025-01-07_fact_r256/3000-15664-0011/251-norm.wav"></audio>
+            </td>
+            <td>
+                <audio class="audio_smaller" controls controlsList="nodownload noplaybackrate" preload="metadata" src="wav/constrained/2025-01-07_fact_r256/8842-302196-0009/84-norm.wav"></audio>
+            </td>
+        </tr>        
+        </tbody>
+    </table>
+    <br>
+
+</body>
+
+</html>
