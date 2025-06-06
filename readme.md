@@ -7,7 +7,7 @@ To-do:
 
 - [ ] Jupyter notebook link (demo.ipynb)
 - [ ] Remove torch.hub everywhere
-- [ ] arXiv link
+- [x] arXiv link
 
 
 ## Quick start
