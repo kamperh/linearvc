@@ -1,6 +1,7 @@
 # LinearVC: Voice conversion with just linear regression
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](license.md)
+[![paper](https://img.shields.io/badge/Paper-link-important)](https://arxiv.org/abs/2506.01510)
 
 To-do:
 
