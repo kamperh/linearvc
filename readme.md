@@ -2,6 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](license.md)
 [![paper](https://img.shields.io/badge/Paper-link-important)](https://arxiv.org/abs/2506.01510)
+[![colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/kamperh/linearvc/blob/master/demo.ipynb)
 
 To-do:
 
