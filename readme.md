@@ -43,8 +43,16 @@ hifigan, _ = torch.hub.load(
 linearvc_model = linearvc.LinearVC(wavlm, hifigan, device)
 
 # Lists of source and target audio files
-source_wavs = ["<filename of audio from source speaker 1>.wav", "<filename of audio from source speaker 2>.wav", ... ]
-target_wavs = ["<filename of audio from target speaker 1>.wav", "<filename of audio from target speaker 2>.wav", ... ]
+source_wavs = [
+    "<filename of audio from source speaker 1>.wav",
+    "<filename of audio from source speaker 2>.wav",
+    ...,
+]
+target_wavs = [
+    "<filename of audio from target speaker 1>.wav",
+    "<filename of audio from target speaker 2>.wav",
+    ...,
+]
 
 # Source input utterance
 input_features = linearvc_model.get_features("<filename>.wav")
@@ -62,9 +70,7 @@ output_wav = linearvc_model.project_and_vocode(input_features, W)
 torchaudio.save("output.wav", output_wav[None], 16000)
 ```
 
-If `parallel=True`, utterances with the same filename are paired up. If
-`parallel=False`, the utterances don't have to align, but then you need more
-data (3 minutes per speaker is good, more than that doesn't help much).
+If `parallel=True`, utterances with the same filename are paired up. If `parallel=False`, the utterances don't have to align, but then you need more data (3 minutes per speaker is good, more than that doesn't help much).
 
 
 ### Script usage
