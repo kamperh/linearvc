@@ -77,8 +77,7 @@ If `parallel=True`, utterances with the same filename are paired up. If `paralle
 
 ### Script usage
 
-Perform LinearVC by finding all the source and target audio files in given
-directories:
+Perform LinearVC by finding all the source and target audio files in given directories:
 
     ./linearvc.py \
         --extension .flac \
@@ -87,11 +86,7 @@ directories:
         ~/LibriSpeech/dev-clean/1272/128104/1272-128104-0000.flac \
         output.wav
 
-When parallel utterances are available, much less data is needed. Running the
-script with `--parallel` as below scans two directories and pairs up all
-utterances with the same filename. E.g. below it finds `002.wav`, `003.wav`,
-etc. in the `p225/` source directory and then pairs these up with the same
-filenames in the `p226/` directory.
+When parallel utterances are available, much less data is needed. Running the script with `--parallel` as below scans two directories and pairs up all utterances with the same filename. E.g. below it finds `002.wav`, `003.wav`, etc. in the `p225/` source directory and then pairs these up with the same filenames in the `p226/` directory.
 
     ./linearvc.py \
         --parallel \
@@ -131,6 +126,8 @@ options:
 
 ## Experiments on all utterances (LibriSpeech)
 
+These experiments are described in ([Kamper et al. 2025](https://arxiv.org/abs/2506.01510)).
+
 Extract WavLM features:
 
     ./extract_wavlm_libri.py \
@@ -149,6 +146,8 @@ Experiments with all utterances:
 
 ## Experiments on parallel utterances (VCTK)
 
+These experiments are not described in the paper but are still interesting.
+
 Downsample speech to 16kHz:
 
     # Development set
@@ -163,8 +162,7 @@ Downsample speech to 16kHz:
         ~/endgame/datasets/VCTK-Corpus/wav48/ \
         ~/scratch/vctk/wav/english/
 
-Create the evaluation dataset (which is already in the `data` directory released
-with the repo):
+Create the evaluation dataset (which is already in the `data/` directory released with the repo):
 
     ./evalcsv_vctk.py \
         data/vctk_scottish.txt \
