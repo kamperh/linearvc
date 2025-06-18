@@ -121,7 +121,7 @@ class LinearVC(nn.Module):
             from numpy import linalg
 
             W, _, _, _ = linalg.lstsq(
-                source_features.cpu(), linear_target.cpu()
+                source_features.cpu(), linear_target.cpu(), rcond=None
             )
         else:
             import celer
