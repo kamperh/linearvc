@@ -7,7 +7,7 @@
 
 ## Overview
 
-Voice conversion is performed using just nearest neigbours. The work is described in:
+Voice conversion is performed using just linear regression. The work is described in:
 
 - H. Kamper, B. van Niekerk, J. Zaïdi, and M-A. Carbonneau, "LinearVC: Linear transformations of self-supervised features through the lens of voice conversion," in *Interspeech*, 2025.
 
