@@ -22,8 +22,25 @@ Install the dependencies in `environment.yml` or run `conda env create -f enviro
 import torch
 import torchaudio
 
+device = "cuda"  # "cpu"
+
 # Load all the required models
-linearvc_model = torch.hub.load("kamperh/linearvc", "get_linearvc", trust_repo=True, device="cuda")
+wavlm = torch.hub.load(
+    "bshall/knn-vc", 
+    "wavlm_large", 
+    trust_repo=True, 
+    progress=True, 
+    device=device, 
+)
+hifigan, _ = torch.hub.load(
+    "bshall/knn-vc",
+    "hifigan_wavlm",
+    trust_repo=True,
+    prematched=True,
+    progress=True,
+    device=device,
+)
+linearvc_model = linearvc.LinearVC(wavlm, hifigan, device)
 
 # Lists of source and target audio files
 source_wavs = ["<filename of audio from source speaker 1>.wav", "<filename of audio from source speaker 2>.wav", ... ]
