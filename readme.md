@@ -4,9 +4,14 @@
 [![paper](https://img.shields.io/badge/Paper-arXiv-red.svg)](https://arxiv.org/abs/2506.01510)
 [![colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/kamperh/linearvc/blob/master/demo.ipynb)
 
-To-do:
 
-- [ ] Paper reference
+## Overview
+
+Voice conversion is performed using just nearest neigbours. The work is described in:
+
+- H. Kamper, B. van Niekerk, J. Zaïdi, and M-A. Carbonneau, "LinearVC: Linear transformations of self-supervised features through the lens of voice conversion," in *Interspeech*, 2025.
+
+Samples: <https://www.kamperh.com/linearvc/>
 
 
 ## Quick start
