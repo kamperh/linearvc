@@ -6,10 +6,7 @@
 
 To-do:
 
-- [ ] Jupyter notebook link (demo.ipynb)
-- [ ] Remove torch.hub everywhere
 - [ ] Paper reference
-- [x] arXiv link
 
 
 ## Quick start
