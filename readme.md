@@ -53,7 +53,7 @@ input_features = linearvc_model.get_features("<filename>.wav")
 W = linearvc_model.get_projmat(
     source_wavs,
     target_wavs,
-    parallel=True,  # disable if not parallel
+    parallel=True,  # enable if parallel
     vad=False,
 )
 
