@@ -16,9 +16,7 @@ To-do:
 
 ### Programmatic usage
 
-Install the dependencies in `environment.yml` or run
-`conda env create -f environment.yml` and check that everything installed
-correctly.
+Install the dependencies in `environment.yml` or run `conda env create -f environment.yml` and check that everything installed correctly. The steps below are also illustrated in the [demo notebook](demo.ipynb).
 
 ```Python
 import torch
